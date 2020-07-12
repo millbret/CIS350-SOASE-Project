@@ -6,8 +6,9 @@ public class Database {
      * Insert all the ships as object ship
      ******************************************/
     private Ship example;
-    private String[] ships = {"example"};
-    private Ship[] ship = {example};
+    private Ship example2;
+    private String[] ships = {"example", "hi"};
+    private Ship[] ship;
 
     private String search;
 
@@ -16,6 +17,8 @@ public class Database {
          * Insert all of the values of the ships in here
          ************************************************/
         this.example = new Ship();
+        this.example2 = new Ship();
+        ship = new Ship[]{example, example2};
         this.search = "";
     }
 

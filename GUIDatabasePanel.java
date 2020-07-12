@@ -44,7 +44,7 @@ public class GUIDatabasePanel extends JPanel {
         list.addListSelectionListener(
                 new ListSelectionListener(){
                     public void valueChanged(ListSelectionEvent event){
-                        info.setText(infoShips[(list.getSelectedIndex())].print());
+                        info.setText(infoShips[list.getSelectedIndex()].print());
 
 //                        setBackground(colors[list.getSelectedIndex()]);
                     }
