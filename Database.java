@@ -7,7 +7,7 @@ public class Database {
      ******************************************/
     private Ship example;
     private Ship example2;
-    private String[] ships = {"example", "hi"};
+    private String[] shipName = {"example", "hi"};
     private Ship[] ship;
 
     private String search;
@@ -34,12 +34,12 @@ public class Database {
         this.example = example;
     }
 
-    public String[] getShips() {
-        return ships;
+    public String[] getShipName() {
+        return shipName;
     }
 
-    public void setShips(String[] ships) {
-        this.ships = ships;
+    public void setShipName(String[] ships) {
+        this.shipName = ships;
     }
 
     public Ship[] getShip() {

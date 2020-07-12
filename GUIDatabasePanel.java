@@ -25,7 +25,7 @@ public class GUIDatabasePanel extends JPanel {
         setLayout(new BorderLayout(5,5));
 
         database = new Database();
-        shipList = database.getShips();
+        shipList = database.getShipName();
         infoShips = database.getShip();
 
 
