@@ -40,6 +40,7 @@ public class Ship {
 
     private int numWeapons;
 
+
     public Ship(){
         this.name = "";
         this.shipType = "";
@@ -85,6 +86,15 @@ public class Ship {
         this.maxSpeed = maxSpd;
         this.antimatterSupply = antimatter;
         this.numWeapons = weaponNum;
+    }
+
+    public String print(){
+        String info;
+        return (info = new String("" +this.name +  "\nShip Type: " +this.shipType +"\nArmor Type: " +this.armorType
+        +" Armor: " +this.armor +"\nFleet Supply: " +this.fleetSupply +"\nCredits: " +this.credits +" Metals: " +this.metals
+        +" Crystals: " +this.crystals +"\nBuild Time: " +this.buildTime +" XP: " +this.XP +"\nHull: " +this.hull
+        +" Hull Restore: " +this.hullRestore +"\n Shield: " +this.shields +" Shield Restore: " +this.shieldRestore +"\nDPS: "
+        +this.DPS +" Max Speed: " +this.maxSpeed +"\nAntimatter: " +this.antimatterSupply +" Number of Weapons: " +this.numWeapons));
     }
 
     public String getName() {
