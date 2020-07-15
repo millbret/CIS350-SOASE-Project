@@ -1,5 +1,12 @@
 package DatabaseStuff;
 
+/******************************************************************************************
+ * @author :    Bret Miller, Omar Tiba, Robert Saunders
+ * @version :   Version 1 for Summer 2020
+ * date:        7/15/2020
+ * class:       GUIDatabasePanel
+ * description: Code relating to whats displayed in the GUI.
+ ******************************************************************************************/
 import javax.swing.*;
 import java.awt.*;
 

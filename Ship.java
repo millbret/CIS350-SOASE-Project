@@ -1,5 +1,12 @@
 package DatabaseStuff;
 
+/******************************************************************************************
+ * @author :    Bret Miller, Omar Tiba, Robert Saunders
+ * @version :   Version 1 for Summer 2020
+ * date:        7/15/2020
+ * class:       Ship
+ * description: Used for creating and holding all of a ships stats.
+ ******************************************************************************************/
 public class Ship {
 
     /** Holds the name of the ship.*/

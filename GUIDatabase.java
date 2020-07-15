@@ -1,5 +1,12 @@
 package DatabaseStuff;
 
+/******************************************************************************************
+ * @author :    Bret Miller, Omar Tiba, Robert Saunders
+ * @version :   Version 1 for Summer 2020
+ * date:        7/15/2020
+ * class:       GUIDatabase
+ * description: This is how the code is run for the user to see it.
+ ******************************************************************************************/
 import javax.swing.*;
 
 class GUIDatabase {

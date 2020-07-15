@@ -1,5 +1,13 @@
 package DatabaseStuff;
 
+/******************************************************************************************
+ * @author :    Bret Miller, Omar Tiba, Robert Saunders
+ * @version :   Version 1 for Summer 2020
+ * date:        7/15/2020
+ * class:       Database
+ * description: Holds all of the ships to be displayed by the GUI for users.
+ ******************************************************************************************/
+
 class Database {
 
     /** Holds the list of ship names.*/
