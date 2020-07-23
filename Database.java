@@ -102,4 +102,265 @@ class Database {
 //    public void setSearch(String search) {
 //        this.search = search;
 //    }
+
+
+    public String compare(Ship a, Ship b){
+        String message = new String();
+
+        message += compareFleetSupply(a,b);
+        message += compareCredits(a,b);
+        message += compareMetals(a,b);
+        message += compareCrystals(a,b);
+        message += compareBuildTimes(a,b);
+        message += compareXP(a,b);
+        message += compareHull(a,b);
+        message += compareHullRestore(a,b);
+        message += compareShields(a,b);
+        message += compareShieldRestore(a,b);
+        message += compareArmor(a,b);
+        message += compareDPS(a,b);
+        message += compareAntimatterSupply(a,b);
+        message += compareNumWeapons(a,b);
+
+        JOptionPane.showMessageDialog(null,message);
+
+        return message;
+    }
+
+    public String compareFleetSupply(Ship a, Ship b){
+
+        if(a.getFleetSupply() > b.getFleetSupply()){
+            return "" +a.getName() +" Has a better fleet supply\n";
+        }
+        else if(a.getFleetSupply() < b.getFleetSupply()){
+            return "" +b.getName() +" Has a better fleet supply\n";
+        }
+        else if(a.getFleetSupply() == b.getFleetSupply()){
+            return "Both ships are even in fleet supply\n";
+        }
+        else{
+            return "Error with Fleet Supply Comparison\n";
+        }
+    }
+
+    public String compareCredits(Ship a, Ship b){
+        if(a.getCredits() > b.getCredits()){
+            return "" +b.getName() +" Has a better credit cost\n";
+        }
+        else if(a.getCredits() < b.getCredits()){
+            return "" +a.getName() +" Has a better credit cost\n";
+        }
+        else if(a.getCredits() == b.getCredits()){
+            return "Both ships are even in credit cost\n";
+        }
+        else{
+            return "Error with Credit Comparison\n";
+        }
+    }
+
+    public String compareCrystals(Ship a, Ship b){
+        if(a.getCrystals() > b.getCrystals()){
+            return "" +b.getName() +" Has a better crystal cost\n";
+        }
+        else if(a.getCrystals() < b.getCrystals()){
+            return "" +a.getName() +" Has a better crystal cost\n";
+        }
+        else if(a.getCrystals() == b.getCrystals()){
+            return "Both ships are even in crystal cost\n";
+        }
+        else{
+            return "Error with Crystal Comparison\n";
+        }
+    }
+
+    public String compareMetals(Ship a, Ship b){
+        if(a.getCrystals() > b.getCrystals()){
+            return "" +b.getName() +" Has a better metal cost\n";
+        }
+        else if(a.getCrystals() < b.getCrystals()){
+            return "" +a.getName() +" Has a better metal cost\n";
+        }
+        else if(a.getCrystals() == b.getCrystals()){
+            return "Both ships are even in metal cost\n";
+        }
+        else{
+            return "Error with Metal Comparison\n";
+        }
+    }
+
+    public String compareBuildTimes(Ship a, Ship b){
+        if(a.getBuildTime() > b.getBuildTime()){
+            return "" +b.getName() +" Has a better build time\n";
+        }
+        else if(a.getBuildTime() < b.getBuildTime()){
+            return "" +a.getName() +" Has a better build time\n";
+        }
+        else if(a.getBuildTime() == b.getBuildTime()){
+            return "Both ships are even in build time\n";
+        }
+        else{
+            return "Error with build time Comparison\n";
+        }
+    }
+
+    public String compareXP(Ship a, Ship b){
+
+        if(a.getXP() > b.getXP()){
+            return "" +a.getName() +" Has a better XP value\n";
+        }
+        else if(a.getXP() < b.getXP()){
+            return "" +b.getName() +" Has a better XP value\n";
+        }
+        else if(a.getXP() == b.getXP()){
+            return "Both ships are even in XP value\n";
+        }
+        else{
+            return "Error with XP Comparison\n";
+        }
+    }
+
+    public String compareHull(Ship a, Ship b){
+
+        if(a.getHull() > b.getHull()){
+            return "" +a.getName() +" Has a better Hull value\n";
+        }
+        else if(a.getHull() < b.getHull()){
+            return "" +b.getName() +" Has a better Hull value\n";
+        }
+        else if(a.getHull() == b.getHull()){
+            return "Both ships are even in Hull value\n";
+        }
+        else{
+            return "Error with Hull Comparison\n";
+        }
+    }
+
+    public String compareHullRestore(Ship a, Ship b){
+
+        if(a.getHullRestore() > b.getHullRestore()){
+            return "" +a.getName() +" Has a better Hull Restore rate\n";
+        }
+        else if(a.getHullRestore() < b.getHullRestore()){
+            return "" +b.getName() +" Has a better Hull Restore rate\n";
+        }
+        else if(a.getHullRestore() == b.getHullRestore()){
+            return "Both ships are even in Hull Restore rate\n";
+        }
+        else{
+            return "Error with Hull Restore Comparison\n";
+        }
+    }
+
+    public String compareShields(Ship a, Ship b){
+
+        if(a.getShields() > b.getShields()){
+            return "" +a.getName() +" Has a better Shield value\n";
+        }
+        else if(a.getShields() < b.getShields()){
+            return "" +b.getName() +" Has a better Shield value\n";
+        }
+        else if(a.getShields() == b.getShields()){
+            return "Both ships are even in Shield value\n";
+        }
+        else{
+            return "Error with Shield Comparison\n";
+        }
+    }
+
+    public String compareShieldRestore(Ship a, Ship b){
+
+        if(a.getShieldRestore() > b.getShieldRestore()){
+            return "" +a.getName() +" Has a better Shield restore rate\n";
+        }
+        else if(a.getShieldRestore() < b.getShieldRestore()){
+            return "" +b.getName() +" Has a better Shield restore rate\n";
+        }
+        else if(a.getShieldRestore() == b.getShieldRestore()){
+            return "Both ships are even in Shield restore rate\n";
+        }
+        else{
+            return "Error with Shield restore Comparison\n";
+        }
+    }
+
+    public String compareArmor(Ship a, Ship b){
+
+        if(a.getArmor() > b.getArmor()){
+            return "" +a.getName() +" Has a better Armor value\n";
+        }
+        else if(a.getArmor() < b.getArmor()){
+            return "" +b.getName() +" Has a better Armor value\n";
+        }
+        else if(a.getArmor() == b.getArmor()){
+            return "Both ships are even in Armor value\n";
+        }
+        else{
+            return "Error with Armor Comparison\n";
+        }
+    }
+
+    public String compareDPS(Ship a, Ship b){
+
+        if(a.getDPS() > b.getDPS()){
+            return "" +a.getName() +" Has a better DPS\n";
+        }
+        else if(a.getDPS() < b.getDPS()){
+            return "" +b.getName() +" Has a better DPS\n";
+        }
+        else if(a.getDPS() == b.getDPS()){
+            return "Both ships are even in DPS\n";
+        }
+        else{
+            return "Error with DPS Comparison\n";
+        }
+    }
+
+    public String compareMaxSpeed(Ship a, Ship b){
+
+        if(a.getMaxSpeed() > b.getMaxSpeed()){
+            return "" +a.getName() +" Has a better Max Speed\n";
+        }
+        else if(a.getMaxSpeed() < b.getMaxSpeed()){
+            return "" +b.getName() +" Has a better Max Speed\n";
+        }
+        else if(a.getMaxSpeed() == b.getMaxSpeed()){
+            return "Both ships are even in Max Speed\n";
+        }
+        else{
+            return "Error with Max Speed Comparison\n";
+        }
+    }
+
+    public String compareAntimatterSupply(Ship a, Ship b){
+
+        if(a.getAntimatterSupply() > b.getAntimatterSupply()){
+            return "" +a.getName() +" Has a better antimatter supply\n";
+        }
+        else if(a.getAntimatterSupply() < b.getAntimatterSupply()){
+            return "" +b.getName() +" Has a better antimatter supply\n";
+        }
+        else if(a.getAntimatterSupply() == b.getAntimatterSupply()){
+            return "Both ships are even in antimatter supply\n";
+        }
+        else{
+            return "Error with antimatter supply Comparison\n";
+        }
+    }
+
+    public String compareNumWeapons(Ship a, Ship b){
+
+        if(a.getNumWeapons() > b.getNumWeapons()){
+            return "" +a.getName() +" Has more weapons\n";
+        }
+        else if(a.getNumWeapons() < b.getNumWeapons()){
+            return "" +b.getName() +" Has more weapons\n";
+        }
+        else if(a.getNumWeapons() == b.getNumWeapons()){
+            return "Both ships have the same number of weapons\n";
+        }
+        else{
+            return "Error with weapon number Comparison\n";
+        }
+    }
+
 }
