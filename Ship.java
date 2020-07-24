@@ -143,7 +143,8 @@ public class Ship {
      * Gets a string with all of the values of the ship to display.
      * @return Ship's information for the gui.
      * ***************************************************************/
-    public String print() {
+    @Override
+    public String toString() {
         String info;
         return (info = new String("" + this.name +  "\nShip Type: "
                 + this.shipType  + "\nFaction: " + this.faction
