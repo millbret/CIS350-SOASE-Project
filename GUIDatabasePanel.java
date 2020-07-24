@@ -32,7 +32,7 @@ class GUIDatabasePanel extends JFrame {
         setLayout(new BorderLayout(5, 15));
 
         shipList = new Database();
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Food");
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Ship");
 
         createNodes(top);
         tree = new JTree(top);
@@ -72,7 +72,7 @@ class GUIDatabasePanel extends JFrame {
     private void createNodes(DefaultMutableTreeNode top) {
 
         shipMap = new HashMap<>();
-        shipMap.put("Food", top);
+        shipMap.put("Ship", top);
 
         Ship[] ship = shipList.getShip();
 
@@ -80,19 +80,19 @@ class GUIDatabasePanel extends JFrame {
         for (int i = 0; i < ship.length; i++) {
 
             //If type does not exist then add all three components
-            if (shipMap.get("Food/" + ship[i].getFaction()) == null) {
-                addShip("Food", ship[i].getFaction());
-                addShip("Food/" + ship[i].getFaction(), ship[i].getShipType());
-                addAliasShip("Food/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
+            if (shipMap.get("Ship/" + ship[i].getFaction()) == null) {
+                addShip("Ship", ship[i].getFaction());
+                addShip("Ship/" + ship[i].getFaction(), ship[i].getShipType());
+                addAliasShip("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
                 //Name.setAlias(food[i].getName());
             } else {
-                if (shipMap.get("Food/" + ship[i].getFaction() + "/" + ship[i].getShipType()) == null) {
-                    addShip("Food/" + ship[i].getFaction(), ship[i].getShipType());
-                    addAliasShip("Food/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
+                if (shipMap.get("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType()) == null) {
+                    addShip("Ship/" + ship[i].getFaction(), ship[i].getShipType());
+                    addAliasShip("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
                     //Name.setAlias(food[i].getName());
                 } else {
-                    if (shipMap.get("Food/" + ship[i].getFaction() + "/" + ship[i].getShipType() + "/" + ship[i].getName()) == null) {
-                        addAliasShip("Food/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
+                    if (shipMap.get("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType() + "/" + ship[i].getName()) == null) {
+                        addAliasShip("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
                         //Name.setAlias(food[i].getName());
                     }
                 }
