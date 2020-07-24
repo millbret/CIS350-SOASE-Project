@@ -1,5 +1,7 @@
 package DatabaseStuff;
 
+import javax.swing.*;
+
 /******************************************************************************************
  * @author :    Bret Miller, Omar Tiba, Robert Saunders
  * @version :   Version 1 for Summer 2020
@@ -51,9 +53,9 @@ class Database {
      * @param x the ship in the list we want the info from.
      * @return The information about the ship.
      * ***************************************************************/
-    public String getInfo(int x) {
-       return (ship[x].print());
-    }
+//    public String getInfo(int x) {
+//       return (ship[x].print());
+//    }
 
    // public Ship getExample() {
     //    return example;
