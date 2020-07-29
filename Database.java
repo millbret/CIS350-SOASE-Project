@@ -119,6 +119,7 @@ class Database {
         message += compareShieldRestore(a,b);
         message += compareArmor(a,b);
         message += compareDPS(a,b);
+        message += compareMaxSpeed(a,b);
         message += compareAntimatterSupply(a,b);
         message += compareNumWeapons(a,b);
 
