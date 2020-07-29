@@ -1,6 +1,8 @@
 package DatabaseStuff;
 
 import javax.swing.*;
+import javax.swing.table.AbstractTableModel;
+import java.util.ArrayList;
 
 /******************************************************************************************
  * @author :    Bret Miller, Omar Tiba, Robert Saunders
@@ -10,15 +12,28 @@ import javax.swing.*;
  * description: Holds all of the ships to be displayed by the GUI for users.
  ******************************************************************************************/
 
-class Database {
+class Database extends AbstractTableModel {
 
-    /** Holds the list of ship names.*/
-    private String[] shipName;
+    /** Holds the list of different ships in the game **/
+    private ArrayList<Ship> ship = new ArrayList<Ship>();
 
-    /** Holds the list of ships.*/
-    private Ship[] ship;
+    /** Holds the list of ships to be compared.**/
+    private ArrayList<Ship> compareShip = new ArrayList<Ship>();
 
-//    private String search;
+    /** Array of Table headers that can be used for comparing ships **/
+    private String[] tableHeaders = {"Name", "Type", "Faction", "Armor Type", "Number of Weapons", "Shield",
+            "Armor", "Hull", "Supply", "Credits", "Metals", "Crystals", "BuildTime", "XP", "Hull Restore",
+            "Shield Restore", "DPS", "Max Speed", "Antimatter"};
+
+    /**Array of booleans to check which headers to display on the table **/
+    private boolean[] boolHeaders = {true, false, false, false, false, false, false, false, false, false,
+            false, false, false, false, false, false, false, false, false,};
+
+    /**Array to display correct table header order **/
+    private String[] updatedTableHeaders = new String[19];
+
+    /** Array to determine and display correct table order **/
+    private int[] tableOrder = new int[19];
 
     /*****************************************************************
      * Constructor  creates a database including ships and.
@@ -27,25 +42,138 @@ class Database {
      * ***************************************************************/
     public Database() {
 
-        Ship paris = new Ship("Paris", "Frigate", "Light", "UNSC", 5, 355,
+        ship.add(new Ship("Paris", "Frigate", "Light", "UNSC", 5, 355,
                 40, 5, 10, 5, 1800, 3, 0, 0,
-                4, 22, 700, 0, 2);
-        Ship punic = new Ship("Punic", "Carrier", "VeryHeavy", "UNSC", 75, 5500,
+                4, 22, 700, 0, 2));
+        ship.add(new Ship("Punic", "Carrier", "VeryHeavy", "UNSC", 75, 5500,
                 1000, 1150, 110, 50,
                 16000, 24, 0, 0,
-                14, 269, 500, 24, 5);
-        Ship marathon = new Ship("Marathon", "Cruiser", "Medium", "UNSC", 25, 950,
+                14, 269, 500, 24, 5));
+        ship.add(new Ship("Marathon", "Cruiser", "Medium", "UNSC", 25, 950,
                 250, 90, 45, 50, 6000, 10, 0, 0,
-                7, 132, 600, 3, 4);
-        Ship CCS = new Ship("CCS", "Cruiser", "Medium", "Covenant", 21, 1650,
+                7, 132, 600, 3, 4));
+        ship.add(new Ship("CCS", "Cruiser", "Medium", "Covenant", 21, 1650,
                 220, 90, 35, 21, 4400, 5, 12000, 600,
-                3, 130, 700, 16, 3);
-        Ship CAS = new Ship("CAS", "Carrier", "VeryHeavy", "Covenant", 100, 10000,
+                3, 130, 700, 16, 3));
+        ship.add(new Ship("CAS", "Carrier", "VeryHeavy", "Covenant", 100, 10000,
                 2600, 1850, 120, 50, 14000, 15, 50000, 2500,
-                8, 480, 600, 62, 5);
-        ship = new Ship[]{paris, punic, marathon, CCS, CAS};
-        shipName = new String[]{"Paris", "Punic", "Marathon", "CCS", "CAS"};
+                8, 480, 600, 62, 5));
+        //ship = new Ship[]{paris, punic, marathon, CCS, CAS};
+        //shipName = new String[]{"Paris", "Punic", "Marathon", "CCS", "CAS"};
 //        this.search = "";
+    }
+
+    private void updateTableHeaders() {
+        int count = 0;
+        for(int i = 0; i < boolHeaders.length; i++){
+            if(boolHeaders[i]) {
+                updatedTableHeaders[count] = tableHeaders[i];
+                tableOrder[count] = i;
+                count++;
+            }
+        }
+    }
+
+    public void setTableHeaders(int index, boolean flag) {
+        boolHeaders[index] = flag;
+        fireTableStructureChanged();
+    }
+
+    public void add(Object a) {
+        compareShip.add((Ship)a);
+        fireTableDataChanged();
+    }
+
+    public void remove(int index){
+        compareShip.remove(index);
+        fireTableDataChanged();
+    }
+
+    @Override
+    public int getRowCount() {
+        return compareShip.size();
+    }
+
+    @Override
+    public int getColumnCount() {
+        int sum = 0;
+        for(int i = 0; i < boolHeaders.length; i++){
+            if(boolHeaders[i] == true)
+                sum++;
+        }
+        return sum;
+    }
+
+    @Override
+    public String getColumnName(int col) {
+        updateTableHeaders();
+        // fireTableStructureChanged();
+        return updatedTableHeaders[col];
+
+    }
+
+    @Override
+    public Object getValueAt(int row, int col) {
+        switch (tableOrder[col]) {
+            case 0:
+                return compareShip.get(row).getName();
+
+            case 1:
+                return compareShip.get(row).getShipType();
+
+            case 2:
+                return compareShip.get(row).getFaction();
+
+            case 3:
+                return compareShip.get(row).getArmorType();
+
+            case 4:
+                return compareShip.get(row).getNumWeapons();
+
+            case 5:
+                return compareShip.get(row).getShields();
+
+            case 6:
+                return compareShip.get(row).getArmor();
+
+            case 7:
+                return compareShip.get(row).getHull();
+
+            case 8:
+                return compareShip.get(row).getFleetSupply();
+
+            case 9:
+                return compareShip.get(row).getCredits();
+
+            case 10:
+                return compareShip.get(row).getMetals();
+
+            case 11:
+                return compareShip.get(row).getCrystals();
+
+            case 12:
+                return compareShip.get(row).getBuildTime();
+
+            case 13:
+                return compareShip.get(row).getXP();
+
+            case 14:
+                return compareShip.get(row).getHullRestore();
+
+            case 15:
+                return compareShip.get(row).getShieldRestore();
+
+            case 16:
+                return compareShip.get(row).getDPS();
+
+            case 17:
+                return compareShip.get(row).getMaxSpeed();
+
+            case 18:
+                return compareShip.get(row).getAntimatterSupply();
+
+        }
+        throw new RuntimeException();
     }
 
     /*****************************************************************
@@ -69,33 +197,33 @@ class Database {
      * Gets the List of ship names.
      * @return list of the ships' names.
      * ***************************************************************/
-    public String[] getShipName() {
-        return shipName;
-    }
+//    public String[] getShipName() {
+//        return ship.get(a.getShipName);
+//    }
 
     /*****************************************************************
      * sets the list of ship names.
      * @param ships the list of ships.
      * ***************************************************************/
-    public void setShipName(String[] ships) {
-        this.shipName = ships;
-    }
+//    //public void setShipName(String[] ships) {
+//        this.shipName = ships;
+//    }
 
     /*****************************************************************
      * Gets the list of ships names.
      * @return list of ships names.
      * ***************************************************************/
-    public Ship[] getShip() {
+    public ArrayList<Ship> getShip() {
         return ship;
     }
 
     /*****************************************************************
      * sets the ship's in the list.
-     * @param ship the ships going in the list.
+     *
      * ***************************************************************/
-    public void setShip(Ship[] ship) {
-        this.ship = ship;
-    }
+//    public void setShip(Ship[] ship) {
+//        this.ship = ship;
+//    }
 
 //    public String getSearch() {
 //        return search;
@@ -119,9 +247,9 @@ class Database {
         message += compareHullRestore(a,b);
         message += compareShields(a,b);
         message += compareShieldRestore(a,b);
+        message += compareMaxSpeed(a,b);
         message += compareArmor(a,b);
         message += compareDPS(a,b);
-        message += compareMaxSpeed(a,b);
         message += compareAntimatterSupply(a,b);
         message += compareNumWeapons(a,b);
 
@@ -129,6 +257,7 @@ class Database {
 
         return message;
     }
+
 
     public String compareFleetSupply(Ship a, Ship b){
 
