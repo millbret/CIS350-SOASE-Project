@@ -9,6 +9,8 @@ package DatabaseStuff;
  ******************************************************************************************/
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import javax.swing.event.TreeSelectionEvent;
@@ -27,43 +29,154 @@ class GUIDatabasePanel extends JFrame {
 
     private DefaultMutableTreeNode root;
 
+    private JTable table;
+
+    private JPopupMenu treePopup;
+    private JPopupMenu tablePopup;
+
+    private JMenuItem menuItem;
+
     public GUIDatabasePanel() {
 
         setLayout(new BorderLayout(5, 15));
 
-        shipList = new Database();
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Ship");
+        //JPanel panel1 = new JPanel();
+        // splitPane = new JSplitPane();
+        // treePanel = new JPanel();
+        // textPanel = new JPanel();
+        // JTabbedPane tabbedPane = new JTabbedPane();
 
+        shipList = new Database();
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Food");
+        //foodList.viewFoods();
         createNodes(top);
+
         tree = new JTree(top);
         root = new DefaultMutableTreeNode("Data");
+        //treeMap = new HashMap<>();
+        //treeMap.put("Food", top);
 
-        //String[] shipList = database.getShipName();
-        //infoShips = database.getShip();
+        //model.reload();
+
+        table = new JTable(shipList);
+        //table.getColumnModel().getColumn(0).setPreferredWidth(20);
+
         scrollPane = new JScrollPane(tree);
         scrollPane.createVerticalScrollBar();
         textArea = new JTextArea(20,50);
 
-        //list = new JList(shipList);
-        //info = new JTextArea("Welcome click on a ship to view it's stats.");
 
+
+        //Jlist of JCheckBoxes to compare values in the JTable
+        JList list = new JList(new CheckListItem[] { new CheckListItem("Type"),
+                new CheckListItem("Faction"), new CheckListItem("Armor Type"), new CheckListItem("Number of Weapons"),
+                new CheckListItem("Shield"),new CheckListItem("Armor"),new CheckListItem("Hull"),
+                new CheckListItem("Fleet Supply"),new CheckListItem("Credits"),new CheckListItem("Metals"),
+                new CheckListItem("Crystals"),new CheckListItem("Build Time"),new CheckListItem("XP"),
+                new CheckListItem("Hull Restore"),new CheckListItem("Shield Restore"),new CheckListItem("DPS"),
+                new CheckListItem("Max Speed"),new CheckListItem("Antimatter Supply")});
+        list.setCellRenderer(new CheckListRenderer());
+        list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        list.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent event){
+                JList list = (JList)event.getSource();
+                int index = list.locationToIndex(event.getPoint());
+                CheckListItem item = (CheckListItem)list.getModel().getElementAt(index);
+                item.setSelected(!item.isSelected()); // Toggle selected state
+                list.repaint(list.getCellBounds(index, index));// Repaint cell
+
+                if(item.isSelected()){
+                    shipList.setTableHeaders(index+1, true);
+                    // table.getColumnModel().getColumn(index+1).setPreferredWidth(20);
+                    System.out.println( "I was selected at index " + item.toString());
+                }
+                else
+                    shipList.setTableHeaders(index+1, false);
+                System.out.println("I was unselected at index " + item.toString());
+            }
+        });
+
+        treePopup = new JPopupMenu();
+        menuItem = new JMenuItem("Compare");
+        menuItem.setMnemonic(KeyEvent.VK_P);
+        menuItem.getAccessibleContext().setAccessibleDescription("Compare");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+                if(node.isLeaf()){
+                    Object nodeInfo = node.getUserObject();
+                    shipList.add(nodeInfo);
+                }
+                //System.out.println("Trying to add a node");
+            }
+        });
+        treePopup.add(menuItem);
+
+        tablePopup = new JPopupMenu();
+        menuItem = new JMenuItem("Remove");
+        menuItem.setMnemonic(KeyEvent.VK_P);
+        menuItem.getAccessibleContext().setAccessibleDescription("Remove");
+        menuItem.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int index = table.getSelectedRow();
+                shipList.remove(index);
+            }
+        });
+        tablePopup.add(menuItem);
 
         add(new JScrollPane(tree), BorderLayout.WEST);
         add(textArea, BorderLayout.CENTER);
+        add(new JScrollPane(list), BorderLayout.EAST);
+        add(new JScrollPane(table), BorderLayout.SOUTH);
 
-        tree.addTreeSelectionListener(new TreeSelectionListener() {
+        table.addMouseListener(new MouseAdapter() {
             @Override
-            public void valueChanged(TreeSelectionEvent e) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode) tree.getLastSelectedPathComponent();
-
-                if (node.isLeaf() && node != null) {
-                    Object nodeInfo = node.getUserObject();
-
-                    textArea.setText(nodeInfo.toString());
-                    //System.out.println("I was clicked");
-                    //System.out.println(nodeInfo.toString());
+            public void mouseClicked(MouseEvent e){
+                if(SwingUtilities.isRightMouseButton(e)){
+                    if(table.getSelectedRow() != -1)
+                        tablePopup.show(e.getComponent(), e.getX(), e.getY());
                 }
             }
+        });
+
+        tree.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                if (SwingUtilities.isRightMouseButton(e)) {
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+                    if(node == null)
+                        return;
+                    else {
+                        if (node.isLeaf()) {
+                            int row = tree.getClosestRowForLocation(e.getX(), e.getY());
+                            tree.setSelectionRow(row);
+                            treePopup.show(e.getComponent(), e.getX(), e.getY());
+                        }
+                    }
+                }
+
+                if ( SwingUtilities.isLeftMouseButton(e)){
+                    DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
+
+                    if(node == null) {
+                        return;
+                    }
+                    else {
+                        if (node.isLeaf()) {
+                            Object nodeInfo = node.getUserObject();
+                            textArea.setText(nodeInfo.toString());
+
+                        } else {
+                            return;
+                        }
+                    }
+                }
+            }
+
+
         });
 
         pack();
@@ -74,25 +187,25 @@ class GUIDatabasePanel extends JFrame {
         shipMap = new HashMap<>();
         shipMap.put("Ship", top);
 
-        Ship[] ship = shipList.getShip();
+        ArrayList<Ship> ship = shipList.getShip();
 
 
-        for (int i = 0; i < ship.length; i++) {
+        for (int i = 0; i < ship.size(); i++) {
 
             //If type does not exist then add all three components
-            if (shipMap.get("Ship/" + ship[i].getFaction()) == null) {
-                addShip("Ship", ship[i].getFaction());
-                addShip("Ship/" + ship[i].getFaction(), ship[i].getShipType());
-                addAliasShip("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
+            if (shipMap.get("Ship/" + ship.get(i).getFaction()) == null) {
+                addShip("Ship", ship.get(i).getFaction());
+                addShip("Ship/" + ship.get(i).getFaction(), ship.get(i).getShipType());
+                addAliasShip("Ship/" + ship.get(i).getFaction() + "/" + ship.get(i).getShipType(), ship.get(i).getName(), ship.get(i));
                 //Name.setAlias(food[i].getName());
             } else {
-                if (shipMap.get("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType()) == null) {
-                    addShip("Ship/" + ship[i].getFaction(), ship[i].getShipType());
-                    addAliasShip("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
+                if (shipMap.get("Ship/" + ship.get(i).getFaction() + "/" + ship.get(i).getShipType()) == null) {
+                    addShip("Ship/" + ship.get(i).getFaction(), ship.get(i).getShipType());
+                    addAliasShip("Ship/" + ship.get(i).getFaction() + "/" + ship.get(i).getShipType(), ship.get(i).getName(), ship.get(i));
                     //Name.setAlias(food[i].getName());
                 } else {
-                    if (shipMap.get("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType() + "/" + ship[i].getName()) == null) {
-                        addAliasShip("Ship/" + ship[i].getFaction() + "/" + ship[i].getShipType(), ship[i].getName(), ship[i]);
+                    if (shipMap.get("Ship/" + ship.get(i).getFaction() + "/" + ship.get(i).getShipType() + "/" + ship.get(i).getName()) == null) {
+                        addAliasShip("Ship/" + ship.get(i).getFaction() + "/" + ship.get(i).getShipType(), ship.get(i).getName(), ship.get(i));
                         //Name.setAlias(food[i].getName());
                     }
                 }
