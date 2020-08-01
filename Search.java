@@ -16,7 +16,7 @@ import static java.lang.Double.parseDouble;
 
             File dir = new File(System.getProperty("user.dir"));
             String[] childs = dir.list();
-            File myObj = new File("C:/Users/Omar Tiba/IdeaProjects/CIS350/src/DatabaseStuff/fileNames.txt");
+            File myObj = new File("DatabaseStuff/fileNames.txt");
             myObj.createNewFile();
             int counter = 0;
             boolean nextPassName = false;
@@ -55,14 +55,14 @@ import static java.lang.Double.parseDouble;
             boolean notDoneFaction = true;
             boolean notDoneType = true;
 
-            FileWriter myWriter = new FileWriter("C:/Users/Omar Tiba/IdeaProjects/CIS350/src/DatabaseStuff/fileNames.txt");
+            FileWriter myWriter = new FileWriter("DatabaseStuff/fileNames.txt");
             for (String child : childs) {
                 myWriter.write(child);
                 myWriter.write("\n");
             }
             myWriter.close();
             String s1;
-            File f1 = new File("C:/Users/Omar Tiba/IdeaProjects/CIS350/src/DatabaseStuff/fileNames.txt"); //Creation of File Descriptor for input file
+            File f1 = new File("DatabaseStuff/fileNames.txt"); //Creation of File Descriptor for input file
             FileReader fr1 = new FileReader(f1);  //Creation of File Reader object
             BufferedReader br1 = new BufferedReader(fr1); //Creation of Buffered
             while((s1 = br1.readLine()) != null) {
@@ -110,8 +110,7 @@ import static java.lang.Double.parseDouble;
 
                             if (word.equals("NameStringID") || (nextPassName && notDoneName)&& !word.equals("")
                                     &&!word.equals("FRIGATE") &&!word.equals("CAPITALSHIP")) {
-                                String name = word.replaceAll("UNSC", "");
-                                name = word.replaceAll( "COV", "");
+                                String name = word.replaceAll("UNSC|COV", "");
                                 if (nextPassName) {
                                     Ship.setName(name);
                                     notDoneName = false;
@@ -360,50 +359,51 @@ import static java.lang.Double.parseDouble;
 
                         }
 
-                        if(counter == 18){
 
-                            shipList.add(Ship);
-                            counter=0;
-                            nextPassName = false;
-                            nextPassCred = false;
-                            nextPassMetal = false;
-                            nextPassCrystal = false;
-                            nextPassSlot = false;
-                            nextPassBuild = false;
-                            nextPassMaxHull = false;
-                            nextPassMaxShield = false;
-                            nextPassHullRestore = false;
-                            nextPassShieldRestore = false;
-                            nextPassArmor = false;
-                            nextPassMaxAnti = false;
-                            nextPassNumWeapons = false;
-                            nextPassMaxSpeed = false;
-                            nextPassXP = false;
-                            nextPassArmorType = false;
-                            notDoneName = true;
-                            notDoneCred = true;
-                            notDoneMetal = true;
-                            notDoneCrystal = true;
-                            notDoneSlotCount = true;
-                            notDoneBuildTime = true;
-                            notDoneMaxHullPoints = true;
-                            notDoneMaxShieldPoints = true;
-                            notDoneHullPointRestoreRate = true;
-                            notDoneShieldPointRestoreRate = true;
-                            notDoneArmor = true;
-                            notDoneMaxAntiMatter = true;
-                            notDoneNumWeapons = true;
-                            notDoneMaxSpeed = true;
-                            notDoneXP = true;
-                            notDoneArmorType = true;
-                            notDoneFaction = true;
-                            notDoneType = true;
-                        }
 
 
                     }
 
                     fr2.close();
+                    if(counter == 18){
+
+                        shipList.add(Ship);
+                        counter=0;
+                        nextPassName = false;
+                        nextPassCred = false;
+                        nextPassMetal = false;
+                        nextPassCrystal = false;
+                        nextPassSlot = false;
+                        nextPassBuild = false;
+                        nextPassMaxHull = false;
+                        nextPassMaxShield = false;
+                        nextPassHullRestore = false;
+                        nextPassShieldRestore = false;
+                        nextPassArmor = false;
+                        nextPassMaxAnti = false;
+                        nextPassNumWeapons = false;
+                        nextPassMaxSpeed = false;
+                        nextPassXP = false;
+                        nextPassArmorType = false;
+                        notDoneName = true;
+                        notDoneCred = true;
+                        notDoneMetal = true;
+                        notDoneCrystal = true;
+                        notDoneSlotCount = true;
+                        notDoneBuildTime = true;
+                        notDoneMaxHullPoints = true;
+                        notDoneMaxShieldPoints = true;
+                        notDoneHullPointRestoreRate = true;
+                        notDoneShieldPointRestoreRate = true;
+                        notDoneArmor = true;
+                        notDoneMaxAntiMatter = true;
+                        notDoneNumWeapons = true;
+                        notDoneMaxSpeed = true;
+                        notDoneXP = true;
+                        notDoneArmorType = true;
+                        notDoneFaction = true;
+                        notDoneType = true;
+                    }
                 }
             }
             fr1.close();
