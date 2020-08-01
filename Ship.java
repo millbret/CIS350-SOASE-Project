@@ -54,9 +54,6 @@ public class Ship {
     /** Holds how much armor the ship has.*/
     private int armor;
 
-    /** Holds the damage per second the ship has.*/
-    private double DPS;
-
     /** Holds the max speed of the ship.*/
     private int maxSpeed;
 
@@ -85,7 +82,6 @@ public class Ship {
         this.shields = 0;
         this.shieldRestore = 0;
         this.armor = 0;
-        this.DPS = 0;
         this.maxSpeed = 0;
         this.antimatterSupply = 0;
         this.numWeapons = 0;
@@ -108,7 +104,6 @@ public class Ship {
      * @param shields How many shield points the ship has.
      * @param shieldRestore How many shield points the ship restores per second.
      * @param armorNum The armor pints of the ship.
-     * @param dps How much damage per second the ship can output.
      * @param maxSpd The maximum speed of the ship.
      * @param antimatter How much antimatter the ship can hold.
      * @param weaponNum Number of weapons that the ship has.
@@ -116,7 +111,7 @@ public class Ship {
     public Ship(String name, String type, String armor, String faction, int supply,
                 int credits, int metals, int crystals, int buildTime,
                 int xp, int hull, int hullRestore, int shields,
-                int shieldRestore, int armorNum, double dps,
+                int shieldRestore, int armorNum,
                 int maxSpd, int antimatter, int weaponNum) {
         this.name = name;
         this.shipType = type;
@@ -133,7 +128,6 @@ public class Ship {
         this.shields = shields;
         this.shieldRestore = shieldRestore;
         this.armor = armorNum;
-        this.DPS = dps;
         this.maxSpeed = maxSpd;
         this.antimatterSupply = antimatter;
         this.numWeapons = weaponNum;
@@ -153,9 +147,9 @@ public class Ship {
                 + "\nCredits: " + this.credits + " Metals: " + this.metals
                 + " Crystals: " + this.crystals + "\nBuild Time: " + this.buildTime
                 + " XP: " + this.XP + "\nHull: " + this.hull
-                + " Hull Restore: " + this.hullRestore + "\n Shield: " + this.shields
+                + " Hull Restore: " + this.hullRestore + "\nShield: " + this.shields
                 + " Shield Restore: " + this.shieldRestore + "\nDPS: "
-                + this.DPS + " Max Speed: " + this.maxSpeed + "\nAntimatter: "
+                + "Max Speed: " + this.maxSpeed + "\nAntimatter: "
                 + this.antimatterSupply + " Number of Weapons: " + this.numWeapons));
     }
 
@@ -365,22 +359,6 @@ public class Ship {
      * ***************************************************************/
     public void setShieldRestore(int shieldRestore) {
         this.shieldRestore = shieldRestore;
-    }
-
-    /*****************************************************************
-     * Gets the Ship's DPS.
-     * @return Ship's DPS.
-     * ***************************************************************/
-    public double getDPS() {
-        return DPS;
-    }
-
-    /*****************************************************************
-     * sets the ship's DPS.
-     * @param DPS the DPS that is being set for the ship.
-     * ***************************************************************/
-    public void setDPS(double DPS) {
-        this.DPS = DPS;
     }
 
     /*****************************************************************

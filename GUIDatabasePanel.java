@@ -23,7 +23,7 @@ class GUIDatabasePanel extends JFrame {
     private JTree tree;
     private JTextArea textArea;
     private Database shipList;
-    //private final JSplitPane splitPane;
+
     private final JScrollPane scrollPane;
     private Map<String, DefaultMutableTreeNode> shipMap;
 
@@ -36,30 +36,30 @@ class GUIDatabasePanel extends JFrame {
 
     private JMenuItem menuItem;
 
+    private JPanel panel1;
+    private JPanel panel2;
+
+    private JTabbedPane tabPane;
+
     public GUIDatabasePanel() {
 
         setLayout(new BorderLayout(5, 15));
 
-        //JPanel panel1 = new JPanel();
-        // splitPane = new JSplitPane();
-        // treePanel = new JPanel();
-        // textPanel = new JPanel();
-        // JTabbedPane tabbedPane = new JTabbedPane();
+        panel1= new JPanel();
+        panel2 = new JPanel();
+
+        tabPane = new JTabbedPane();
 
         shipList = new Database();
-        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Food");
+        DefaultMutableTreeNode top = new DefaultMutableTreeNode("Ship");
         //foodList.viewFoods();
         createNodes(top);
 
         tree = new JTree(top);
         root = new DefaultMutableTreeNode("Data");
-        //treeMap = new HashMap<>();
-        //treeMap.put("Food", top);
 
-        //model.reload();
 
         table = new JTable(shipList);
-        //table.getColumnModel().getColumn(0).setPreferredWidth(20);
 
         scrollPane = new JScrollPane(tree);
         scrollPane.createVerticalScrollBar();
@@ -73,7 +73,7 @@ class GUIDatabasePanel extends JFrame {
                 new CheckListItem("Shield"),new CheckListItem("Armor"),new CheckListItem("Hull"),
                 new CheckListItem("Fleet Supply"),new CheckListItem("Credits"),new CheckListItem("Metals"),
                 new CheckListItem("Crystals"),new CheckListItem("Build Time"),new CheckListItem("XP"),
-                new CheckListItem("Hull Restore"),new CheckListItem("Shield Restore"),new CheckListItem("DPS"),
+                new CheckListItem("Hull Restore"),new CheckListItem("Shield Restore"),
                 new CheckListItem("Max Speed"),new CheckListItem("Antimatter Supply")});
         list.setCellRenderer(new CheckListRenderer());
         list.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
@@ -89,11 +89,11 @@ class GUIDatabasePanel extends JFrame {
                 if(item.isSelected()){
                     shipList.setTableHeaders(index+1, true);
                     // table.getColumnModel().getColumn(index+1).setPreferredWidth(20);
-                    System.out.println( "I was selected at index " + item.toString());
+                    //System.out.println( "I was selected at index " + item.toString());
                 }
                 else
                     shipList.setTableHeaders(index+1, false);
-                System.out.println("I was unselected at index " + item.toString());
+                    //System.out.println("I was unselected at index " + item.toString());
             }
         });
 
@@ -107,7 +107,12 @@ class GUIDatabasePanel extends JFrame {
                 DefaultMutableTreeNode node = (DefaultMutableTreeNode)tree.getLastSelectedPathComponent();
                 if(node.isLeaf()){
                     Object nodeInfo = node.getUserObject();
-                    shipList.add(nodeInfo);
+                    if(shipList.inTable((Ship)nodeInfo))
+                        JOptionPane.showMessageDialog(null, "Food is already in the table");
+
+                    else
+                        shipList.add(nodeInfo);
+                    //shipList.add(nodeInfo);
                 }
                 //System.out.println("Trying to add a node");
             }
@@ -126,11 +131,17 @@ class GUIDatabasePanel extends JFrame {
             }
         });
         tablePopup.add(menuItem);
+        //JScrollPane tableScrollPane = new JScrollPane(table);
+        //tableScrollPane.setPreferredSize(200, 600);
 
-        add(new JScrollPane(tree), BorderLayout.WEST);
-        add(textArea, BorderLayout.CENTER);
-        add(new JScrollPane(list), BorderLayout.EAST);
-        add(new JScrollPane(table), BorderLayout.SOUTH);
+        panel1.add(new JScrollPane(tree), BorderLayout.WEST);
+        panel1.add(textArea, BorderLayout.CENTER);
+        panel2.add(new JScrollPane(list), BorderLayout.EAST);
+        panel2.add(new JScrollPane(table), BorderLayout.SOUTH);
+
+        tabPane.addTab("Ship List", panel1);
+        tabPane.addTab("Compare", panel2);
+        add(tabPane);
 
         table.addMouseListener(new MouseAdapter() {
             @Override
@@ -236,6 +247,5 @@ class GUIDatabasePanel extends JFrame {
 
     public static void main(String args[]){
         createGUI();
-
     }
 }

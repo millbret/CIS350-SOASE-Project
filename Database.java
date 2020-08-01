@@ -2,6 +2,7 @@ package DatabaseStuff;
 
 import javax.swing.*;
 import javax.swing.table.AbstractTableModel;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /******************************************************************************************
@@ -14,6 +15,8 @@ import java.util.ArrayList;
 
 class Database extends AbstractTableModel {
 
+    private Search search = new Search();
+
     /** Holds the list of different ships in the game **/
     private ArrayList<Ship> ship = new ArrayList<Ship>();
 
@@ -23,17 +26,17 @@ class Database extends AbstractTableModel {
     /** Array of Table headers that can be used for comparing ships **/
     private String[] tableHeaders = {"Name", "Type", "Faction", "Armor Type", "Number of Weapons", "Shield",
             "Armor", "Hull", "Supply", "Credits", "Metals", "Crystals", "BuildTime", "XP", "Hull Restore",
-            "Shield Restore", "DPS", "Max Speed", "Antimatter"};
+            "Shield Restore", "Max Speed", "Antimatter"};
 
     /**Array of booleans to check which headers to display on the table **/
     private boolean[] boolHeaders = {true, false, false, false, false, false, false, false, false, false,
-            false, false, false, false, false, false, false, false, false,};
+            false, false, false, false, false, false, false, false};
 
     /**Array to display correct table header order **/
-    private String[] updatedTableHeaders = new String[19];
+    private String[] updatedTableHeaders = new String[18];
 
     /** Array to determine and display correct table order **/
-    private int[] tableOrder = new int[19];
+    private int[] tableOrder = new int[18];
 
     /*****************************************************************
      * Constructor  creates a database including ships and.
@@ -41,26 +44,32 @@ class Database extends AbstractTableModel {
      * that contains the ships themselves.
      * ***************************************************************/
     public Database() {
+        try {
+            search.storeShips(ship);
 
-        ship.add(new Ship("Paris", "Frigate", "Light", "UNSC", 5, 355,
-                40, 5, 10, 5, 1800, 3, 0, 0,
-                4, 22, 700, 0, 2));
-        ship.add(new Ship("Punic", "Carrier", "VeryHeavy", "UNSC", 75, 5500,
-                1000, 1150, 110, 50,
-                16000, 24, 0, 0,
-                14, 269, 500, 24, 5));
-        ship.add(new Ship("Marathon", "Cruiser", "Medium", "UNSC", 25, 950,
-                250, 90, 45, 50, 6000, 10, 0, 0,
-                7, 132, 600, 3, 4));
-        ship.add(new Ship("CCS", "Cruiser", "Medium", "Covenant", 21, 1650,
-                220, 90, 35, 21, 4400, 5, 12000, 600,
-                3, 130, 700, 16, 3));
-        ship.add(new Ship("CAS", "Carrier", "VeryHeavy", "Covenant", 100, 10000,
-                2600, 1850, 120, 50, 14000, 15, 50000, 2500,
-                8, 480, 600, 62, 5));
-        //ship = new Ship[]{paris, punic, marathon, CCS, CAS};
-        //shipName = new String[]{"Paris", "Punic", "Marathon", "CCS", "CAS"};
-//        this.search = "";
+        }catch(Exception e){
+            System.out.print(e);
+        }
+
+//        ship.add(new Ship("Paris", "Frigate", "Light", "UNSC", 5, 355,
+//                40, 5, 10, 5, 1800, 3, 0, 0,
+//                4, 700, 0, 2));
+//        ship.add(new Ship("Punic", "Carrier", "VeryHeavy", "UNSC", 75, 5500,
+//                1000, 1150, 110, 50,
+//                16000, 24, 0, 0,
+//                14, 500, 24, 5));
+//        ship.add(new Ship("Marathon", "Cruiser", "Medium", "UNSC", 25, 950,
+//                250, 90, 45, 50, 6000, 10, 0, 0,
+//                7, 600, 3, 4));
+//        ship.add(new Ship("CCS", "Cruiser", "Medium", "Covenant", 21, 1650,
+//                220, 90, 35, 21, 4400, 5, 12000, 600,
+//                3, 700, 16, 3));
+//        ship.add(new Ship("CAS", "Carrier", "VeryHeavy", "Covenant", 100, 10000,
+//                2600, 1850, 120, 50, 14000, 15, 50000, 2500,
+//                8, 600, 62, 5));
+//        //ship = new Ship[]{paris, punic, marathon, CCS, CAS};
+//        //shipName = new String[]{"Paris", "Punic", "Marathon", "CCS", "CAS"};
+////        this.search = "";
     }
 
     private void updateTableHeaders() {
@@ -87,6 +96,10 @@ class Database extends AbstractTableModel {
     public void remove(int index){
         compareShip.remove(index);
         fireTableDataChanged();
+    }
+
+    public boolean inTable(Ship ship){
+        return compareShip.contains(ship);
     }
 
     @Override
@@ -164,12 +177,9 @@ class Database extends AbstractTableModel {
                 return compareShip.get(row).getShieldRestore();
 
             case 16:
-                return compareShip.get(row).getDPS();
-
-            case 17:
                 return compareShip.get(row).getMaxSpeed();
 
-            case 18:
+            case 17:
                 return compareShip.get(row).getAntimatterSupply();
 
         }
@@ -249,7 +259,6 @@ class Database extends AbstractTableModel {
         message += compareShieldRestore(a,b);
         message += compareMaxSpeed(a,b);
         message += compareArmor(a,b);
-        message += compareDPS(a,b);
         message += compareAntimatterSupply(a,b);
         message += compareNumWeapons(a,b);
 
@@ -431,21 +440,6 @@ class Database extends AbstractTableModel {
         }
     }
 
-    public String compareDPS(Ship a, Ship b){
-
-        if(a.getDPS() > b.getDPS()){
-            return "" +a.getName() +" Has a better DPS\n";
-        }
-        else if(a.getDPS() < b.getDPS()){
-            return "" +b.getName() +" Has a better DPS\n";
-        }
-        else if(a.getDPS() == b.getDPS()){
-            return "Both ships are even in DPS\n";
-        }
-        else{
-            return "Error with DPS Comparison\n";
-        }
-    }
 
     public String compareMaxSpeed(Ship a, Ship b){
 
