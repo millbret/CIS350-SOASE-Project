@@ -38,9 +38,10 @@ import static java.lang.Double.parseDouble;
 
             /**A String array for holding the directory names **/
             String[] childs = dir.list();
+            String pathName = dir.getPath();
 
             /**Creates a file called fileNames.txt to store the list of all file names. **/
-            File myObj = new File("DatabaseStuff/fileNames.txt");
+            File myObj = new File(pathName + "/src/DatabaseStuff/fileNames.txt");
             myObj.createNewFile();
 
             /**A counter for keeping track of the number of values that have been filled in each ship. **/
@@ -85,7 +86,7 @@ import static java.lang.Double.parseDouble;
             boolean notDoneType = true;
 
             /**Writes all the names into fileNames.txt. **/
-            FileWriter myWriter = new FileWriter("DatabaseStuff/fileNames.txt");
+            FileWriter myWriter = new FileWriter(pathName + "/src/DatabaseStuff/fileNames.txt");
             for (String child : childs) {
                 myWriter.write(child);
                 myWriter.write("\n");
@@ -94,7 +95,7 @@ import static java.lang.Double.parseDouble;
 
             /**Stores the file name gotten from fileNames.txt. **/
             String s1;
-            File f1 = new File("DatabaseStuff/fileNames.txt");
+            File f1 = new File(pathName+"/src/DatabaseStuff/fileNames.txt");
 
             /**Reads file names from fileNames.txt.**/
             FileReader fr1 = new FileReader(f1);
