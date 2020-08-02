@@ -1,52 +1,24 @@
 package DatabaseStuff;
 
-/******************************************************************************************
- * @author :    Bret Miller, Omar Tiba, Robert Saunders
- * @version :   Version 2 for Summer 2020
- * date:        8/2/2020
- * class:       Search
- * description: Function that searches through file directory and finds all files with .Entity
- * and adds them to a list to be searched through to create a filled ArrayList of ships.
- ******************************************************************************************/
 import java.io.*;
 import java.lang.*;
 import java.util.ArrayList;
+
+import static java.lang.Integer.parseInt;
 import static java.lang.Double.parseDouble;
 
 
-/*****************************************************************
- * Constructor  creates a ship to then fill getting the info from
- * files that contain ship related info.
- * ***************************************************************/
+
     public class Search {
 
-
-        /** Makes a ship to then fill later.**/
         private static DatabaseStuff.Ship Ship;
-
-
-    /******************************************************************************************
-     * Description: Checks if the given move is a valid move
-     *
-     * @param shipList an ArrayList that gets filled with ships after they are filled with info.
-     * @throws IOException exception for if the files it is looking for are not there.
-     *******************************************************************************************/
         public static void storeShips(ArrayList<Ship> shipList) throws IOException {
 
-            /**Gets the current directory of the Search.java file. **/
             File dir = new File(System.getProperty("user.dir"));
-
-            /**A String array for holding the directory names **/
             String[] childs = dir.list();
-
-            /**Creates a file called fileNames.txt to store the list of all file names. **/
             File myObj = new File("DatabaseStuff/fileNames.txt");
             myObj.createNewFile();
-
-            /**A counter for keeping track of the number of values that have been filled in each ship. **/
             int counter = 0;
-
-            /**Booleans for keeping track of if a key word was found so it knows to come back on the next loop **/
             boolean nextPassName = false;
             boolean nextPassCred = false;
             boolean nextPassMetal = false;
@@ -64,7 +36,6 @@ import static java.lang.Double.parseDouble;
             boolean nextPassXP = false;
             boolean nextPassArmorType = false;
 
-            /**Booleans for keeping track of what values where input into the Ship object. **/
             boolean notDoneName = true;
             boolean notDoneCred = true;
             boolean notDoneMetal = true;
@@ -84,50 +55,33 @@ import static java.lang.Double.parseDouble;
             boolean notDoneFaction = true;
             boolean notDoneType = true;
 
-            /**Writes all the names into fileNames.txt. **/
             FileWriter myWriter = new FileWriter("DatabaseStuff/fileNames.txt");
             for (String child : childs) {
                 myWriter.write(child);
                 myWriter.write("\n");
             }
             myWriter.close();
-
-            /**Stores the file name gotten from fileNames.txt. **/
             String s1;
-            File f1 = new File("DatabaseStuff/fileNames.txt");
-
-            /**Reads file names from fileNames.txt.**/
-            FileReader fr1 = new FileReader(f1);
-            BufferedReader br1 = new BufferedReader(fr1);
-
-            /**While loop to keep going untill all lines in fileNames.txt have been gone through. **/
+            File f1 = new File("DatabaseStuff/fileNames.txt"); //Creation of File Descriptor for input file
+            FileReader fr1 = new FileReader(f1);  //Creation of File Reader object
+            BufferedReader br1 = new BufferedReader(fr1); //Creation of Buffered
             while((s1 = br1.readLine()) != null) {
 
-                /**A Ship object to fill with info **/
                Ship = new DatabaseStuff.Ship();
 
-                /**If statement to check if file name from fileNames.txt is a file type that contains ship info.**/
+
                 if (s1.contains("FRIGATE") || s1.contains("CAPITAL")) {
-
-                    /**Makes new file with the name gotten from fileNames.txt **/
                     File f2 = new File(s1);
-                    String[] words = null;
-                    FileReader fr2 = new FileReader(f2);
-                    BufferedReader br2 = new BufferedReader(fr2);
-
-                    /**String to hold a the line read from the current file **/
+                    String[] words = null;  //Initialize the word Array
+                    FileReader fr2 = new FileReader(f2);  //Creation of File Reader object
+                    BufferedReader br2 = new BufferedReader(fr2); //Creation of BufferedReader object
                     String s2;
+                    while ((s2 = br2.readLine()) != null) {  //Reading Content from the file
 
-                    /**While loop to read through every line in the current file **/
-                    while ((s2 = br2.readLine()) != null) {
+                        words = s2.split("\"|\\s|\\t|\\_" );//Split the word using quotation marks
 
-                        /**Separates the line using spaces, tabs, and underscores as delimiters **/
-                        words = s2.split("\"|\\s|\\t|\\_" );
-
-                        /**For loop to go through all the words gotten from splitting the line up. **/
                         for (String word : words) {
                             String[] fileName = words;
-
 
 
                             if (word.equals("UNSC") && notDoneFaction) {
@@ -251,8 +205,7 @@ import static java.lang.Double.parseDouble;
 
                             }
 
-                            if (word.equals("ExperiencePointsForDestroying") || (Ship.getShipType().equals("CapitalShip")
-                                    && Ship.getXP() != 50) || (nextPassXP && notDoneXP))
+                            if (word.equals("ExperiencePointsForDestroying") || (Ship.getShipType().equals("CapitalShip") && Ship.getXP() != 50) || (nextPassXP && notDoneXP))
                             {
 
                                 if (nextPassXP) {
@@ -275,8 +228,7 @@ import static java.lang.Double.parseDouble;
                                 }
                             }
 
-                            if (word.equals("MaxHullPoints") || (nextPassMaxHull && notDoneMaxHullPoints)
-                                    && !word.equals("")&&!word.equals("StartValue")) {
+                            if (word.equals("MaxHullPoints") || (nextPassMaxHull && notDoneMaxHullPoints) && !word.equals("")&&!word.equals("StartValue")) {
 
                                 if (nextPassMaxHull) {
                                     Ship.setHull((int) Math.round(parseDouble(word)));
@@ -291,8 +243,7 @@ import static java.lang.Double.parseDouble;
                                 }
                             }
 
-                            if (word.equals("MaxShieldPoints") || (nextPassMaxShield && notDoneMaxShieldPoints)
-                                    && !word.equals("")&&!word.equals("StartValue")) {
+                            if (word.equals("MaxShieldPoints") || (nextPassMaxShield && notDoneMaxShieldPoints)&& !word.equals("")&&!word.equals("StartValue")) {
                                 if (nextPassMaxShield) {
                                     Ship.setShields((int) Math.round(parseDouble(word)));
                                     notDoneMaxShieldPoints = false;
@@ -306,8 +257,7 @@ import static java.lang.Double.parseDouble;
                                 }
                             }
 
-                            if (word.equals("HullPointRestoreRate") || (nextPassHullRestore
-                                    && notDoneHullPointRestoreRate)&& !word.equals("")&&!word.equals("StartValue")) {
+                            if (word.equals("HullPointRestoreRate") || (nextPassHullRestore && notDoneHullPointRestoreRate)&& !word.equals("")&&!word.equals("StartValue")) {
                                 if (nextPassHullRestore) {
                                     Ship.setHullRestore((int) Math.round(parseDouble(word)));
                                     notDoneHullPointRestoreRate = false;
@@ -321,8 +271,7 @@ import static java.lang.Double.parseDouble;
                                 }
                             }
 
-                            if (word.equals("ShieldPointRestoreRate") || (nextPassShieldRestore
-                                    && notDoneShieldPointRestoreRate)&& !word.equals("")&&!word.equals("StartValue")) {
+                            if (word.equals("ShieldPointRestoreRate") || (nextPassShieldRestore && notDoneShieldPointRestoreRate)&& !word.equals("")&&!word.equals("StartValue")) {
                                 if (nextPassShieldRestore) {
                                     Ship.setShieldRestore((int) Math.round(parseDouble(word)));
                                     notDoneShieldPointRestoreRate = false;
@@ -336,8 +285,7 @@ import static java.lang.Double.parseDouble;
                                 }
                             }
 
-                            if (word.equals("ArmorPointsFromExperience") || word.equals("BaseArmorPoints")
-                                    || (nextPassArmor && notDoneArmor)&&!word.equals("")&& !word.equals("StartValue")) {
+                            if (word.equals("ArmorPointsFromExperience") || word.equals("BaseArmorPoints")|| (nextPassArmor && notDoneArmor)&&!word.equals("")&& !word.equals("StartValue")) {
                                 if (nextPassArmor) {
                                     Ship.setArmor((int) Math.round(parseDouble(word)));
                                     notDoneArmor = false;
@@ -351,8 +299,7 @@ import static java.lang.Double.parseDouble;
                                 }
                             }
 
-                            if (word.equals("MaxAntiMatter") || (nextPassMaxAnti && notDoneMaxAntiMatter)
-                                    && !word.equals("")&&!word.equals("StartValue")) {
+                            if (word.equals("MaxAntiMatter") || (nextPassMaxAnti && notDoneMaxAntiMatter)&& !word.equals("")&&!word.equals("StartValue")) {
                                 if (nextPassMaxAnti) {
                                     Ship.setAntimatterSupply((int) Math.round(parseDouble(word)));
                                     notDoneMaxAntiMatter = false;
@@ -366,8 +313,7 @@ import static java.lang.Double.parseDouble;
                                 }
                             }
 
-                            if (word.equals("armorType")|| (nextPassArmorType && notDoneArmorType
-                                    && !word.equals(""))) {
+                            if (word.equals("armorType")|| (nextPassArmorType && notDoneArmorType && !word.equals(""))) {
                                 if (nextPassArmorType) {
                                     Ship.setArmorType(word);
                                     notDoneArmorType = false;
@@ -418,19 +364,11 @@ import static java.lang.Double.parseDouble;
 
                     }
 
-                    /**Closes the currently open file. **/
                     fr2.close();
-
-                    /**Checks to see if all the info has been put into the Ship. **/
                     if(counter == 18){
 
-                        /**Adds the filled Ship into the ShipList. **/
                         shipList.add(Ship);
-
-                        /**Resets the counter in preparation of filling a new Ship object. **/
                         counter=0;
-
-                        /**Resets all Booleans in preparation of filling a new Ship object. **/
                         nextPassName = false;
                         nextPassCred = false;
                         nextPassMetal = false;
@@ -468,8 +406,6 @@ import static java.lang.Double.parseDouble;
                     }
                 }
             }
-
-            /**Closes the fileNames.txt file. **/
             fr1.close();
         }
 
