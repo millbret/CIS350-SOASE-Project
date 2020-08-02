@@ -143,14 +143,14 @@ public class Ship {
         return (info = new String("" + this.name +  "\nShip Type: "
                 + this.shipType  + "\nFaction: " + this.faction
                 + "\nArmor Type: " + this.armorType
-                + " Armor: " + this.armor + "\nFleet Supply: " + this.fleetSupply
-                + "\nCredits: " + this.credits + " Metals: " + this.metals
-                + " Crystals: " + this.crystals + "\nBuild Time: " + this.buildTime
-                + " XP: " + this.XP + "\nHull: " + this.hull
-                + " Hull Restore: " + this.hullRestore + "\nShield: " + this.shields
-                + " Shield Restore: " + this.shieldRestore + "\nDPS: "
-                + "Max Speed: " + this.maxSpeed + "\nAntimatter: "
-                + this.antimatterSupply + " Number of Weapons: " + this.numWeapons));
+                + " \nArmor: " + this.armor + "\nFleet Supply: " + this.fleetSupply
+                + "\nCredits: " + this.credits + " \nMetals: " + this.metals
+                + " \nCrystals: " + this.crystals + "\nBuild Time: " + this.buildTime
+                + " \nXP: " + this.XP + "\nHull: " + this.hull
+                + " \nHull Restore: " + this.hullRestore + "\nShield: " + this.shields
+                + " \nShield Restore: " + this.shieldRestore
+                + "\nMax Speed: " + this.maxSpeed + "\nAntimatter: "
+                + this.antimatterSupply + " \nNumber of Weapons: " + this.numWeapons));
     }
 
     /*****************************************************************
