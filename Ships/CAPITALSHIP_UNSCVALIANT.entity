@@ -1,0 +1,375 @@
+TXT2
+SinsArchiveVersion 194
+entityType "CapitalShip"
+ability:0 "AbilityUNSCValiantAIFireControl"
+ability:1 "AbilityUNSCValiantEvasiveManeuvers"
+ability:2 "AbilityUNSCValiantIncendiaryArchers"
+ability:3 "AbilityUNSCValiantFlagBridge"
+ability:4 "AbilityUNSCCruiserPassiveBundle"
+defaultAutoAttackRange "GravityWell"
+defaultAutoAttackOn TRUE
+prefersToFocusFire FALSE
+usesFighterAttack FALSE
+autoJoinFleetDefault TRUE
+canBomb FALSE
+mainViewIcon "MAINVIEWICON_CAPITALSHIP_UNSCVALIANT"
+basePrice  
+	credits 1900.000000
+	metal 300.000000
+	crystal 150.000000
+slotCount 30.000000
+BuildTime 60.000000
+MaxHullPoints
+	StartValue 9000.000000
+	ValueIncreasePerLevel 450.000000
+MaxShieldPoints  
+	StartValue 0.000000
+	ValueIncreasePerLevel 0.000000
+HullPointRestoreRate  
+	StartValue 18.000000
+	ValueIncreasePerLevel 0.500000
+ShieldPointRestoreRate  
+	StartValue 0.000000
+	ValueIncreasePerLevel 0.000000
+ArmorPointsFromExperience  
+	StartValue 10.000000
+	ValueIncreasePerLevel 0.250000
+maxMitigation  
+	StartValue 0.000000
+	ValueIncreasePerLevel 0.000000
+MaxAntiMatter
+	StartValue 6.0000000
+	ValueIncreasePerLevel 1.0000000
+AntiMatterRestoreRate  
+	StartValue 0.0000
+	ValueIncreasePerLevel 0.000
+CultureProtectRate  
+	StartValue 0.300000
+	ValueIncreasePerLevel 0.050000
+NameStringID "CAPITALSHIP_UNSCVALIANT_NAME"
+DescriptionStringID "CAPITALSHIP_UNSCVALIANT_DESCRIPTION"
+picture "PICTURE_CAPITALSHIP_UNSCVALIANT"
+Prerequisites  
+	NumResearchPrerequisites 2
+	ResearchPrerequisite  
+		Subject "RESEARCH_UNSCMANUFACTORY_VALIANT"
+		Level 1
+	ResearchPrerequisite
+		Subject "RESEARCHSUBJECT_UNSC_FACTIONCOLE"
+		Level 1
+	RequiredFactionNameID "IDS_PLAYERFACTIONNAME_UNSCCOLE"
+	RequiredCompletedResearchSubjects 0
+roleType "Invalid"
+statCountType "CapitalShipBattleship"
+numRandomDebrisLarge 0
+numRandomDebrisSmall 0
+numSpecificDebris 0
+armorType "Heavy"
+hudIcon "HUDICON_CAPITALSHIP_UNSCVALIANT"
+smallHudIcon "MAINVIEWICON_CAPITALSHIP_UNSCVALIANT"
+infoCardIcon "MAINVIEWICON_CAPITALSHIP_UNSCVALIANT"
+minZoomDistanceMult 1.250000
+NumWeapons 5
+Weapon  
+	WeaponType "Projectile"
+	damageEnums  
+		AttackType "ANTIHEAVY"
+		DamageAffectType "AFFECTS_SHIELDS_AND_HULL"
+		DamageApplyType "BACKLOADED"
+		DamageType "PHYSICAL"
+		WeaponClassType "GAUSS"
+	DamagePerBank:FRONT 1000.000000
+	DamagePerBank:BACK 0.000000
+	DamagePerBank:LEFT 0.000000
+	DamagePerBank:RIGHT 0.000000
+	Range 24000.000000
+	PreBuffCooldownTime 20.000000
+	CanFireAtFighter FALSE
+	SynchronizedTargeting TRUE
+	PointStaggerDelay 0.200000
+	TravelSpeed 12000.000000
+	Duration 0.000000
+	fireConstraintType "CanAlwaysFire"
+	WeaponEffects  
+		weaponType "Projectile"
+		burstCount 1
+		burstDelay 0.000000
+			fireDelay 0.000000
+	muzzleEffectName "Weapon_UNSCMACHeavy_Muzzle"
+		muzzleSoundMinRespawnTime 0.100000
+		muzzleSounds  
+			soundCount 4
+			sound "WEAPON_UNSC_MAC_MUZZLE"
+			sound "WEAPON_UNSC_MAC_MUZZLE_ALT1"
+			sound "WEAPON_UNSC_MAC_MUZZLE_ALT2"
+			sound "WEAPON_UNSC_MAC_MUZZLE_ALT3"
+		hitEffectName "Weapon_UNSCMAC_Hit"
+		hitHullEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_PHYSICALHEAVY_HITHULL"
+		hitShieldsEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_GENERICHEAVY_HITSHIELDS"
+		projectileTravelEffectName "Weapon_UNSCMACHeavy_Travel"
+Weapon  
+	WeaponType "Missile"
+	damageEnums  
+		AttackType "ANTIHEAVY"
+		DamageAffectType "AFFECTS_SHIELDS_AND_HULL"
+		DamageApplyType "BACKLOADED"
+		DamageType "PHYSICAL"
+		WeaponClassType "MISSILE"
+	DamagePerBank:FRONT 135.000000
+	DamagePerBank:BACK 0.000000
+	DamagePerBank:LEFT 67.500000
+	DamagePerBank:RIGHT 67.500000
+	Range 18000.000000
+	PreBuffCooldownTime 9.00000
+	CanFireAtFighter FALSE
+	SynchronizedTargeting FALSE
+	PointStaggerDelay 0.070000
+	TravelSpeed 2000.000000
+	Duration 0.000000
+	fireConstraintType "CanAlwaysFire"
+	WeaponEffects  
+		weaponType "Missile"
+		burstCount 1
+		burstDelay 0.600000
+			fireDelay 0.000000
+	muzzleEffectName "Weapon_UNSCHeavyArcherMissile_Muzzle"
+		muzzleSoundMinRespawnTime 0.500000
+		muzzleSounds  
+			soundCount 3
+			sound "WEAPON_TECHCAPITALMISSILEHEAVY_MUZZLE"
+			sound "WEAPON_TECHCAPITALMISSILEHEAVY_MUZZLE_ALT1"
+			sound "WEAPON_TECHCAPITALMISSILEHEAVY_MUZZLE_ALT2"
+		hitEffectName "Weapon_UNSCHeavyArcherMissile_Hit"
+		hitHullEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_MISSILEHEAVY_HITGENERIC"
+		hitShieldsEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_MISSILEHEAVY_HITGENERIC"
+		missileTravelEffectName "Weapon_UNSCHeavyArcherMissile_Travel"
+		missileStartTurningDistance 250.000000
+		missileSlowTurnRate 1.000000
+		missileMaxSlowTurnTime 0.750000
+Weapon  
+	WeaponType "Projectile"
+	damageEnums  
+		AttackType "ANTIVERYLIGHT"
+		DamageAffectType "AFFECTS_SHIELDS_AND_HULL"
+		DamageApplyType "BACKLOADED"
+		DamageType "PHYSICAL"
+		WeaponClassType "AUTOCANNON"
+	DamagePerBank:FRONT 20.000000
+	DamagePerBank:BACK 20.000000
+	DamagePerBank:LEFT 50.000000
+	DamagePerBank:RIGHT 50.000000
+	Range 5500.000000
+	PreBuffCooldownTime 4.000000
+	CanFireAtFighter TRUE
+	SynchronizedTargeting FALSE
+	PointStaggerDelay 0.080000
+	TravelSpeed 6000.000000
+	Duration 0.000000
+	fireConstraintType "CanAlwaysFire"
+	WeaponEffects  
+		weaponType "Projectile"
+		burstCount 6
+		burstDelay 0.100000
+			fireDelay 0.000000
+	muzzleEffectName "Weapon_UNSCAAA_Muzzle"
+		muzzleSoundMinRespawnTime 10.000000
+		muzzleSounds  
+			soundCount 2
+			sound "WEAPON_TECHCAPITALAUTOCANNONLIGHT_MUZZLE"
+			sound "WEAPON_TECHCAPITALAUTOCANNONLIGHT_MUZZLE_ALT1"
+		hitEffectName "Weapon_UNSCAAA_Hit"
+		hitHullEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_PHYSICALLIGHT_HITHULL"
+		hitShieldsEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_GENERICLIGHT_HITSHIELDS"
+		projectileTravelEffectName "Weapon_UNSCAAA_Travel"
+Weapon  
+	WeaponType "Projectile"
+	damageEnums  
+		AttackType "ANTIHEAVY"
+		DamageAffectType "AFFECTS_SHIELDS_AND_HULL"
+		DamageApplyType "BACKLOADED"
+		DamageType "PHYSICAL"
+		WeaponClassType "RAILGUN"
+	DamagePerBank:FRONT 150.000000
+	DamagePerBank:BACK 0.000000
+	DamagePerBank:LEFT 0.000000
+	DamagePerBank:RIGHT 0.000000
+	Range 10000.000000
+	PreBuffCooldownTime 5.000000
+	CanFireAtFighter FALSE
+	SynchronizedTargeting FALSE
+	PointStaggerDelay 0.00000
+	TravelSpeed 6000.000000
+	Duration 0.000000
+	fireConstraintType "Research"
+    researchPrerequisites
+		NumResearchPrerequisites 1
+		ResearchPrerequisite
+			Subject "RESEARCH_UNSCARMAMENT_VALIANTCOILGUNS"
+			Level 1
+		RequiredFactionNameID ""
+		RequiredCompletedResearchSubjects 0
+	WeaponEffects  
+		weaponType "Projectile"
+		burstCount 3
+		burstDelay 1.000000
+			fireDelay 0.000000
+	muzzleEffectName "Weapon_UNSCCoilgun_Muzzle"
+		muzzleSoundMinRespawnTime 0.10000
+		muzzleSounds  
+			soundCount 3
+			sound "WEAPON_UNSCBROADSIDECANNON_MUZZLE"
+			sound "WEAPON_UNSCBROADSIDECANNON_MUZZLE_ALT1"
+			sound "WEAPON_UNSCBROADSIDECANNON_MUZZLE_ALT2"
+		hitEffectName "Weapon_UNSCAAA_Hit"
+		hitHullEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_PHYSICALHEAVY_HITHULL"
+		hitShieldsEffectSounds  
+			soundCount 1
+			sound "WEAPONIMPACT_GENERICHEAVY_HITSHIELDS"
+		projectileTravelEffectName "Weapon_UNSCDeckGun_Travel"
+Weapon  
+	WeaponType "Missile"
+	damageEnums  
+		AttackType "COMPOSITE"
+		DamageAffectType "AFFECTS_SHIELDS_AND_HULL"
+		DamageApplyType "BACKLOADED"
+		DamageType "PHYSICAL"
+		WeaponClassType "ION"
+	DamagePerBank:FRONT 2500.000000
+	DamagePerBank:BACK 0.000000
+	DamagePerBank:LEFT 0.000000
+	DamagePerBank:RIGHT 0.000000
+	Range 18000.000000
+	PreBuffCooldownTime 120.00000
+	CanFireAtFighter FALSE
+	SynchronizedTargeting FALSE
+	PointStaggerDelay 0.000000
+	TravelSpeed 2000.000000
+	Duration 0.000000
+	fireConstraintType "CanAlwaysFire"
+	WeaponEffects  
+		weaponType "Missile"
+		burstCount 1
+		burstDelay 0.000000
+			fireDelay 0.000000
+	muzzleEffectName "Weapon_UNSCShiva_Muzzle"
+		muzzleSoundMinRespawnTime 0.100000
+		muzzleSounds  
+			soundCount 1
+			sound "WEAPON_UNSCTACTICALNUKE_MUZZLE"
+		hitEffectName "Weapon_UNSCShiva_Hit"
+		hitHullEffectSounds  
+			soundCount 1
+			sound "WEAPON_UNSCTACTICALNUKE_IMPACT"
+		hitShieldsEffectSounds  
+			soundCount 1
+			sound "WEAPON_UNSCTACTICALNUKE_IMPACTSHIELDS"
+		missileTravelEffectName "Weapon_UNSCShiva_Travel"
+		missileStartTurningDistance 250.000000
+		missileSlowTurnRate 1.000000
+		missileMaxSlowTurnTime 0.750000
+m_weaponIndexForRange 1
+firingAlignmentType "Default"
+TargetCountPerBank:FRONT 1
+TargetCountPerBank:BACK 1
+TargetCountPerBank:LEFT 1
+TargetCountPerBank:RIGHT 1
+canOnlyTargetStructures FALSE
+mass 10000.000000
+ShieldMeshName "CAPITALSHIP_UNSCVALIANT_SHIELD"
+renderShield TRUE
+maxAccelerationLinear 200.0000
+maxAccelerationStrafe 50.0000
+maxDecelerationLinear 1000.0000
+maxAccelerationAngular 1.3000
+maxDecelerationAngular 10.0000
+maxSpeedLinear 600.000000
+maxRollRate 2.000000
+maxRollAngle 35.000000
+useCustomHyperspaceEffects TRUE
+effects
+	chargeUpEffectName "SlipspaceChargeUpUNSCCap"
+	chargeUpEffectNameBetweenStars "SlipspaceChargeUpUNSCCap"
+	chargeUpEffectNameDestabilized "SlipspaceChargeUpUNSCCap"
+	chargeUpEffectSoundID "HYPERSPACE_CHARGEUP"
+	travelEffectName "SlipspaceTravelNoneCap"
+	travelEffectNameBetweenStars "SlipspaceTravelNoneCap"
+	travelEffectNameDestabilized "SlipspaceTravelNoneCap"
+	travelEffectSoundID "HYPERSPACE_TRAVEL"
+	exitEffectName "SlipspaceExitUNSCCap"
+	exitEffectSoundID "HYPERSPACE_EXIT"
+squadTypeEntityDef:0 "SQUAD_UNSCLONGSWORDCOMBAT"
+squadAntiMatterCost:0 3.000000
+squadTypeEntityDef:1 ""
+squadAntiMatterCost:1 0.000000
+squadTypeEntityDef:2 "SQUAD_UNSCBASELARDBOMBER"
+squadAntiMatterCost:2 3.000000
+squadTypeEntityDef:3 ""
+squadAntiMatterCost:3 0.000000
+NumSoundsFor:ONATTACKORDERISSUED 6
+SoundID "CAPITALSHIP_UNSCVALIANT_ONATTACKORDERISSUED_0"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONATTACKORDERISSUED_1"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONATTACKORDERISSUED_2"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONATTACKORDERISSUED_3"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONATTACKORDERISSUED_4"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONATTACKORDERISSUED_5"
+NumSoundsFor:ONCREATION 1
+SoundID "CAPITALSHIP_UNSCVALIANT_ONCREATION"
+NumSoundsFor:ONGENERALORDERISSUED 3
+SoundID "CAPITALSHIP_UNSCVALIANT_ONGENERALORDERISSUED_0"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONGENERALORDERISSUED_1"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONGENERALORDERISSUED_2"
+NumSoundsFor:ONSELECTED 6
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSELECTED_0"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSELECTED_1"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSELECTED_2"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSELECTED_3"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSELECTED_4"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSELECTED_5"
+NumSoundsFor:ONSTARTPHASEJUMP 2
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSTARTPHASEJUMP_0"
+SoundID "CAPITALSHIP_UNSCVALIANT_ONSTARTPHASEJUMP_1"
+MeshNameInfoCount 2
+MeshNameInfo
+	meshName "CAPITALSHIP_UNSCVALIANT"
+	criteriaType "None"
+MeshNameInfo
+	meshName "CAPITALSHIP_UNSCVALIANT_TURRET"
+	criteriaType "Research"
+	prerequisites
+		NumResearchPrerequisites 1
+		ResearchPrerequisite
+			Subject "RESEARCH_UNSCARMAMENT_VALIANTCOILGUNS"
+			Level 1
+		RequiredFactionNameID ""
+		RequiredCompletedResearchSubjects 1
+meshNameIncreasedEffectName ""
+meshNameDecreasedEffectName ""
+ExhaustParticleSystemName "EXHAUST_CAPITALSHIP_UNSCVALIANT"
+ExplosionName "UNSC_Capitalship_Small"
+CommandPoints  
+	StartValue 1.000000
+	ValueIncreasePerLevel 0.000000
+weaponCooldownDecreasePerc  
+	StartValue 0.000000
+	ValueIncreasePerLevel 0.000000
+weaponDamageIncreasePerc  
+	StartValue 0.000000
+	ValueIncreasePerLevel 0.010000
+HyperspaceChargingSoundID "HYPERSPACE_CHARGEUP"
+formationRank 2
+minShadow 0.200000
+maxShadow 0.600000
